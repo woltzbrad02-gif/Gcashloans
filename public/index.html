@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fil">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash</title>
+    <title>GCash</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         * {
@@ -52,12 +52,12 @@
             font-weight: 700;
         }
         
-        .logo-eco {
-            color: #0066ff;
+        .logo-g {
+            color: #007dfe;
         }
         
         .logo-cash {
-            color: #ff0000;
+            color: #007dfe;
         }
         
         .card {
@@ -97,7 +97,7 @@
         }
         
         .calc-section {
-            background: #f8f9ff;
+            background: #f0f7ff;
             border-radius: clamp(15px, 4vw, 20px);
             padding: clamp(18px, 5vw, 24px);
             margin-bottom: clamp(18px, 5vw, 24px);
@@ -129,7 +129,7 @@
         }
         
         .input-value {
-            color: #4361ee;
+            color: #007dfe;
             font-weight: 700;
         }
         
@@ -147,7 +147,7 @@
             width: clamp(24px, 6vw, 28px);
             height: clamp(24px, 6vw, 28px);
             border-radius: 50%;
-            background: #4361ee;
+            background: #007dfe;
             cursor: pointer;
         }
         
@@ -160,7 +160,7 @@
         }
         
         .payment-box {
-            background: #f0f4ff;
+            background: #e6f0ff;
             padding: clamp(14px, 4vw, 18px);
             border-radius: clamp(12px, 4vw, 16px);
             text-align: center;
@@ -176,13 +176,13 @@
         .payment-amount {
             font-size: clamp(26px, 7vw, 30px);
             font-weight: 700;
-            color: #4361ee;
+            color: #007dfe;
         }
         
         .apply-btn {
             width: 100%;
             padding: clamp(12px, 4vw, 16px);
-            background: linear-gradient(to right, #4361ee, #7209b7);
+            background: linear-gradient(to right, #007dfe, #0056b3);
             color: white;
             border: none;
             border-radius: 50px;
@@ -224,48 +224,48 @@
 <body>
     <header>
         <button class="menu-btn">☰</button>
-        <div class="logo"><span class="logo-eco">Eco</span><span class="logo-cash">Cash</span></div>
+        <div class="logo"><span class="logo-g">G</span><span class="logo-cash">Cash</span></div>
         <div></div>
     </header>
     <main class="card">
         <div>
-            <h1 class="title">Get Your Loan Approved Fast</h1>
-            <p class="subtitle">Quick approval • Competitive rates • Flexible terms</p>
+            <h1 class="title">Mabilis na Pag-apruba ng Loan</h1>
+            <p class="subtitle">Mabilis na apruba • Mababang interes • Madaling termino</p>
             <div class="calc-section">
-                <h2 class="calc-title">Loan Calculator</h2>
+                <h2 class="calc-title">Kalkulator ng Loan</h2>
                 <div class="input-group">
                     <div class="input-header">
-                        <span class="input-label">Loan Amount</span>
-                        <span class="input-value" id="amountValue">$5,000</span>
+                        <span class="input-label">Halaga ng Loan</span>
+                        <span class="input-value" id="amountValue">₱5,000</span>
                     </div>
                     <input type="range" class="slider" min="100" max="5000" value="5000" id="amountSlider">
-                    <div class="range-labels"><span>$100</span><span>$5,000</span></div>
+                    <div class="range-labels"><span>₱100</span><span>₱5,000</span></div>
                 </div>
                 <div class="input-group">
                     <div class="input-header">
-                        <span class="input-label">Loan Term</span>
-                        <span class="input-value" id="termValue">12 months</span>
+                        <span class="input-label">Termino ng Loan</span>
+                        <span class="input-value" id="termValue">12 buwan</span>
                     </div>
                     <input type="range" class="slider" min="6" max="60" step="6" value="12" id="termSlider">
-                    <div class="range-labels"><span>6 months</span><span>60 months</span></div>
+                    <div class="range-labels"><span>6 buwan</span><span>60 buwan</span></div>
                 </div>
                 <div class="payment-box">
-                    <span class="payment-label">Monthly Payment</span>
-                    <span class="payment-amount" id="paymentAmount">$450.00</span>
+                    <span class="payment-label">Buwanang Hulog</span>
+                    <span class="payment-amount" id="paymentAmount">₱450.00</span>
                 </div>
             </div>
-            <button class="apply-btn" id="applyBtn">APPLY NOW</button>
+            <button class="apply-btn" id="applyBtn">MAG-APPLY NA</button>
         </div>
         <div class="features">
             <div class="feature">
-                <div class="feature-icon">⚡</div>Fast Approval<br>Within 24 hours</div>
+                <div class="feature-icon">⚡</div>Mabilis na Apruba<br>Sa loob ng 24 oras</div>
             <div class="feature">
-                <div class="feature-icon">💰</div>Low Rates<br>From 8%</div>
+                <div class="feature-icon">💰</div>Mababang Interes<br>Mula 8%</div>
             <div class="feature">
-                <div class="feature-icon">🔒</div>Secure<br>Bank-level</div>
+                <div class="feature-icon">🔒</div>Ligtas at Panatag<br>Antas-Bangko</div>
         </div>
     </main>
-    <footer>© 2025 EcoCash</footer>
+    <footer>© 2025 GCash</footer>
     <script>
         const amountSlider = document.getElementById('amountSlider');
         const termSlider = document.getElementById('termSlider');
@@ -276,16 +276,16 @@
         function updateCalculator() {
             const amount = parseFloat(amountSlider.value);
             const months = parseFloat(termSlider.value);
-            amountValue.textContent = '$' + amount.toLocaleString();
-            termValue.textContent = months + (months === 1 ? ' month' : ' months');
+            amountValue.textContent = '₱' + amount.toLocaleString();
+            termValue.textContent = months + (months === 1 ? ' buwan' : ' buwan');
             const annualRate = 0.08;
             const monthlyRate = annualRate / 12;
             if (months === 0) {
-                paymentAmount.textContent = '$' + amount.toFixed(2);
+                paymentAmount.textContent = '₱' + amount.toFixed(2);
             } else {
                 const power = Math.pow(1 + monthlyRate, months);
                 const monthlyPayment = amount * (monthlyRate * power) / (power - 1);
-                paymentAmount.textContent = '$' + monthlyPayment.toFixed(2);
+                paymentAmount.textContent = '₱' + monthlyPayment.toFixed(2);
             }
         }
         updateCalculator();

